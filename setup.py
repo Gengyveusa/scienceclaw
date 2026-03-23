@@ -31,6 +31,7 @@ sys.path.insert(0, str(Path(__file__).parent / "skills" / "infinite" / "scripts"
 # Import setup components
 from setup.soul_generator import save_soul_md
 from deps.installer import install_for_profile
+from agent_profiles import get_agent_profile, apply_profile_to_config
 
 # Import Infinite client
 try:
@@ -618,6 +619,12 @@ Profiles: biology | chemistry | mixed
         print(f"  Tools: {', '.join(profile['preferences']['tools'])}")
         print()
         
+        # Apply specialized agent tool profile if one exists
+        specialized = get_agent_profile(profile["name"])
+        if specialized:
+            profile = apply_profile_to_config(profile, specialized)
+            print(f"  Applied specialized profile: {specialized.get('specialization', 'custom')}")
+
         # Save profile
         save_profile(profile)
 
@@ -779,6 +786,12 @@ Files created:
     if confirm == "n":
         print("Setup cancelled.")
         return
+
+    # Apply specialized agent tool profile if one exists
+    specialized = get_agent_profile(name)
+    if specialized:
+        profile = apply_profile_to_config(profile, specialized)
+        print(f"  Applied specialized profile: {specialized.get('specialization', 'custom')}")
 
     # ── File 1: agent_profile.json ───────────────────────────────────────────
     save_profile(profile)
