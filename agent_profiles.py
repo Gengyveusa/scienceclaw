@@ -25,40 +25,42 @@ from typing import Dict, List, Optional
 
 AGENT_TOOL_PROFILES: Dict[str, dict] = {
     # -------------------------------------------------------------------
-    # QuantumBioAgent-1 — biology specialization
-    # Focus: quantum coherence in biological systems, periodontal biofilm,
-    #        bacteriophage therapy
+    # QuantumBioAgent-1 — mitochondrial quantum biology
+    # Focus: quantum tunneling in ETC, quantum coherence in respiratory
+    #        complexes, proton tunneling in ATP synthase, mitochondrial
+    #        membrane potential quantum effects, ROS quantum dynamics
     # -------------------------------------------------------------------
     "QuantumBioAgent-1": {
         "specialization": "biology",
         "description": (
-            "Quantum biology specialist investigating quantum coherence in "
-            "biological systems, periodontal biofilm dynamics, and "
-            "bacteriophage therapy applications."
+            "Mitochondrial quantum biology specialist investigating quantum "
+            "tunneling in the electron transport chain, quantum coherence in "
+            "respiratory complexes I-IV, proton tunneling in ATP synthase, "
+            "and reactive oxygen species quantum dynamics."
         ),
         "default_queries": [
-            "quantum coherence biological systems photosynthesis",
-            "quantum tunneling enzyme catalysis proton transfer",
-            "periodontal biofilm Porphyromonas gingivalis virulence",
-            "bacteriophage therapy antibiotic resistant biofilm",
-            "quantum biology radical pair mechanism magnetoreception",
-            "exciton transport light harvesting complexes",
-            "biofilm quorum sensing disruption phage",
-            "quantum effects NADH electron transport chain",
-            "phage therapy periodontal pathogens clinical trials",
-            "quantum decoherence timescales warm wet biological",
+            "quantum tunneling electron transport chain mitochondria",
+            "quantum coherence Complex I NADH ubiquinone oxidoreductase",
+            "proton tunneling ATP synthase rotary mechanism mitochondria",
+            "mitochondrial membrane potential quantum effects proton motive force",
+            "reactive oxygen species quantum dynamics superoxide mitochondria",
+            "quantum biology Complex III cytochrome bc1 Q-cycle electron bifurcation",
+            "Complex IV cytochrome c oxidase quantum tunneling oxygen reduction",
+            "mitochondrial Complex II succinate dehydrogenase quantum effects",
+            "mitochondrial DNA mutation rate quantum error mechanisms",
+            "quantum decoherence mitochondrial inner membrane electron transfer",
         ],
         "default_mesh_headings": [
+            "Mitochondria",
             "Quantum Theory",
-            "Biofilms",
-            "Bacteriophages",
-            "Periodontitis",
-            "Photosynthesis",
+            "Electron Transport Chain Complex Proteins",
             "Electron Transport",
-            "Energy Transfer",
-            "Porphyromonas gingivalis",
-            "Anti-Bacterial Agents",
-            "Phage Therapy",
+            "Mitochondrial Proton-Translocating ATPases",
+            "Reactive Oxygen Species",
+            "Mitochondrial Membranes",
+            "Proton-Motive Force",
+            "DNA, Mitochondrial",
+            "Oxidative Phosphorylation",
         ],
         "priority_databases": [
             "pubmed",
@@ -78,18 +80,18 @@ AGENT_TOOL_PROFILES: Dict[str, dict] = {
             "websearch",
         ],
         "expertise_tags": [
+            "mitochondria",
             "quantum-biology",
+            "quantum-tunneling",
+            "electron-transport-chain",
+            "ATP-synthase",
+            "proton-tunneling",
+            "respiratory-complex",
+            "membrane-potential",
+            "reactive-oxygen-species",
+            "oxidative-phosphorylation",
+            "mitochondrial-DNA",
             "quantum-coherence",
-            "biofilm",
-            "periodontal-biofilm",
-            "bacteriophage",
-            "phage-therapy",
-            "photosynthesis",
-            "electron-transport",
-            "radical-pair-mechanism",
-            "magnetoreception",
-            "enzyme-tunneling",
-            "exciton-dynamics",
         ],
         "preferred_tools": [
             "pubmed", "pubmed-database", "arxiv", "arxiv-database",
@@ -99,64 +101,68 @@ AGENT_TOOL_PROFILES: Dict[str, dict] = {
         ],
         "research_focus": {
             "interests": [
-                "quantum coherence in biological systems",
-                "periodontal biofilm formation and disruption",
-                "bacteriophage therapy for resistant infections",
-                "quantum tunneling in enzyme catalysis",
-                "radical pair mechanism in magnetoreception",
+                "quantum tunneling in mitochondrial electron transport chain",
+                "quantum coherence in respiratory complexes I-IV",
+                "proton tunneling mechanisms in ATP synthase",
+                "mitochondrial membrane potential and quantum effects",
+                "reactive oxygen species generation via quantum dynamics",
+                "mitochondrial DNA mutation rates and quantum error mechanisms",
             ],
             "organisms": [
-                "Porphyromonas gingivalis",
-                "Chlorobaculum tepidum",
-                "Rhodobacter sphaeroides",
-                "Cryptochrome (avian)",
-                "Escherichia coli",
+                "Homo sapiens",
+                "Mus musculus",
+                "Saccharomyces cerevisiae",
+                "Bos taurus",
             ],
             "proteins": [
-                "FMO complex",
-                "Cryptochrome",
-                "Reaction center",
-                "Aromatic amine dehydrogenase",
-                "ATP synthase",
+                "Complex I (NADH:ubiquinone oxidoreductase)",
+                "Complex II (succinate dehydrogenase)",
+                "Complex III (cytochrome bc1)",
+                "Complex IV (cytochrome c oxidase)",
+                "ATP synthase (Complex V)",
+                "Cytochrome c",
+                "Ubiquinone (Coenzyme Q)",
             ],
         },
     },
 
     # -------------------------------------------------------------------
-    # ChemSpecAgent-1 — chemistry / spectroscopy specialization
-    # Focus: NADH/FAD/ATP/GSH spectral signatures, Raman and
-    #        fluorescence spectroscopy literature
+    # ChemSpecAgent-1 — mitochondrial spectroscopy specialization
+    # Focus: NADH/FAD autofluorescence in mitochondria, cytochrome c
+    #        oxidase spectral signatures, mitochondrial membrane potential
+    #        probes, Raman/FLIM of mitochondrial metabolic states
     # -------------------------------------------------------------------
     "ChemSpecAgent-1": {
         "specialization": "chemistry",
         "description": (
-            "Chemistry and spectroscopy specialist focused on endogenous "
-            "fluorophore spectral signatures (NADH, FAD, ATP, GSH), "
-            "Raman spectroscopy, and fluorescence lifetime imaging."
+            "Mitochondrial spectroscopy specialist focused on NADH/FAD "
+            "autofluorescence in mitochondria, cytochrome c oxidase spectral "
+            "signatures, mitochondrial membrane potential fluorescent probes "
+            "(JC-1, TMRM, MitoTracker), and FLIM of mitochondrial metabolic states."
         ),
         "default_queries": [
-            "NADH autofluorescence spectral signature excitation emission",
-            "FAD flavin adenine dinucleotide fluorescence lifetime",
-            "ATP bioluminescence Raman spectroscopy detection",
-            "glutathione GSH Raman spectral marker oxidative stress",
-            "Raman spectroscopy biofilm chemical composition",
-            "fluorescence lifetime imaging microscopy FLIM metabolic",
-            "NADH FAD redox ratio fluorescence imaging",
-            "surface enhanced Raman spectroscopy SERS biomarker",
-            "two-photon excitation fluorescence NADH tissue",
-            "coherent anti-Stokes Raman scattering CARS biological",
+            "NADH autofluorescence mitochondria two-photon excitation emission",
+            "FAD fluorescence lifetime mitochondrial metabolic state FLIM",
+            "cytochrome c oxidase near-infrared spectroscopy absorption spectrum",
+            "JC-1 mitochondrial membrane potential fluorescent probe aggregation",
+            "TMRM tetramethylrhodamine mitochondrial membrane potential imaging",
+            "MitoTracker mitochondria fluorescent staining spectral properties",
+            "Raman spectroscopy mitochondrial function cytochrome c resonance",
+            "NADH FAD redox ratio mitochondrial oxidative phosphorylation imaging",
+            "fluorescence lifetime imaging microscopy mitochondrial heterogeneity",
+            "mitochondrial NADH pool free bound fluorescence lifetime components",
         ],
         "default_mesh_headings": [
+            "Mitochondria/metabolism",
             "Spectrum Analysis, Raman",
             "Spectrometry, Fluorescence",
             "NAD/metabolism",
-            "Flavin-Adenine Dinucleotide",
-            "Adenosine Triphosphate",
-            "Glutathione",
+            "Flavin-Adenine Dinucleotide/metabolism",
+            "Electron Transport Complex IV",
+            "Membrane Potential, Mitochondrial",
+            "Fluorescent Dyes",
             "Microscopy, Fluorescence",
             "Optical Imaging",
-            "Fluorescent Dyes",
-            "Molecular Probes",
         ],
         "priority_databases": [
             "nistwebbook",
@@ -175,19 +181,19 @@ AGENT_TOOL_PROFILES: Dict[str, dict] = {
             "websearch",
         ],
         "expertise_tags": [
-            "spectroscopy",
+            "mitochondrial-spectroscopy",
+            "NADH-autofluorescence",
+            "FAD-fluorescence",
+            "cytochrome-c-oxidase",
+            "membrane-potential-probes",
+            "JC-1",
+            "TMRM",
+            "MitoTracker",
             "raman-spectroscopy",
-            "fluorescence-spectroscopy",
-            "NADH",
-            "FAD",
-            "ATP",
-            "GSH",
             "FLIM",
-            "SERS",
-            "autofluorescence",
-            "redox-ratio",
+            "mitochondrial-redox",
             "metabolic-imaging",
-            "endogenous-fluorophore",
+            "two-photon-microscopy",
         ],
         "preferred_tools": [
             "nistwebbook", "pubchem", "pubchem-database", "chembl",
@@ -197,60 +203,64 @@ AGENT_TOOL_PROFILES: Dict[str, dict] = {
         ],
         "research_focus": {
             "interests": [
-                "NADH and FAD autofluorescence spectral characterization",
-                "Raman spectroscopy for biological tissue analysis",
-                "fluorescence lifetime imaging of metabolic state",
-                "surface enhanced Raman spectroscopy biomarkers",
-                "spectral unmixing of endogenous fluorophores",
+                "NADH and FAD autofluorescence in mitochondria",
+                "cytochrome c oxidase near-infrared spectral signatures",
+                "mitochondrial membrane potential fluorescent probes (JC-1, TMRM, MitoTracker)",
+                "Raman spectroscopy of mitochondrial respiratory chain components",
+                "FLIM of mitochondrial metabolic states and heterogeneity",
+                "spectral unmixing of mitochondrial endogenous fluorophores",
             ],
             "compounds": [
                 "NADH",
                 "FAD",
-                "ATP",
-                "GSH (glutathione)",
-                "porphyrins",
-                "collagen",
-                "tryptophan",
+                "Cytochrome c",
+                "JC-1",
+                "TMRM (tetramethylrhodamine methyl ester)",
+                "MitoTracker dyes",
+                "Rhodamine 123",
+                "Coenzyme Q10",
             ],
         },
     },
 
     # -------------------------------------------------------------------
-    # SwarmSynthAgent-1 — cross-domain synthesis / linker
-    # Pulls from both bio and chem agents, finds interdisciplinary
-    # connections, generates bridging synthesis reports.
+    # SwarmSynthAgent-1 — mitochondrial quantum-biology synthesis
+    # Bridges mitochondrial biology with quantum physics: how quantum
+    # effects in ETC relate to disease, quantum biology of aging,
+    # quantum protection mechanisms in healthy vs diseased mitochondria.
     # -------------------------------------------------------------------
     "SwarmSynthAgent-1": {
         "specialization": "synthesis",
         "description": (
-            "Cross-domain synthesis agent that links biology and chemistry "
-            "findings. Identifies interdisciplinary connections between "
-            "quantum biology, spectroscopy, biofilm, and phage therapy "
-            "research to generate bridging synthesis reports."
+            "Cross-domain synthesis agent bridging mitochondrial biology "
+            "with quantum physics. Connects quantum effects in the electron "
+            "transport chain to disease states, investigates quantum biology "
+            "of aging via mitochondrial dysfunction, and identifies quantum "
+            "protection mechanisms in healthy vs diseased mitochondria."
         ),
         "default_queries": [
-            "quantum biology spectroscopy biofilm Raman fluorescence",
-            "NADH autofluorescence biofilm metabolic activity",
-            "bacteriophage biofilm Raman spectroscopy monitoring",
-            "fluorescence lifetime imaging biofilm infection",
-            "quantum coherence photodynamic therapy biofilm",
-            "metabolic imaging periodontal disease spectroscopy",
-            "phage therapy combined spectroscopic monitoring",
-            "redox state NADH FAD biofilm antibiotic resistance",
-            "quantum dots fluorescence biofilm detection",
-            "interdisciplinary quantum biology drug delivery",
+            "quantum effects electron transport chain mitochondrial disease",
+            "mitochondrial dysfunction quantum biology aging senescence",
+            "quantum tunneling efficiency Complex I deficiency neurodegeneration",
+            "NADH autofluorescence mitochondrial metabolic state disease marker",
+            "quantum coherence respiratory chain Parkinson Alzheimer mitochondria",
+            "mitochondrial membrane potential quantum proton leak aging",
+            "reactive oxygen species quantum yield mitochondrial disease",
+            "spectroscopic detection mitochondrial quantum efficiency in vivo",
+            "quantum protection mechanisms healthy versus diseased mitochondria",
+            "mitochondrial electron transfer quantum biology translational medicine",
         ],
         "default_mesh_headings": [
-            "Interdisciplinary Research",
-            "Translational Science",
-            "Biofilms/drug effects",
-            "Spectrum Analysis, Raman",
-            "Phage Therapy",
-            "NAD/metabolism",
+            "Mitochondria/physiopathology",
             "Quantum Theory",
-            "Drug Delivery Systems",
-            "Fluorescence",
-            "Anti-Infective Agents",
+            "Electron Transport Chain Complex Proteins",
+            "Mitochondrial Diseases",
+            "Aging/metabolism",
+            "Reactive Oxygen Species",
+            "Neurodegenerative Diseases/metabolism",
+            "Spectrometry, Fluorescence",
+            "Oxidative Phosphorylation",
+            "Translational Medical Research",
         ],
         "priority_databases": [
             "pubmed",
@@ -268,15 +278,17 @@ AGENT_TOOL_PROFILES: Dict[str, dict] = {
         ],
         "expertise_tags": [
             "cross-domain-synthesis",
-            "interdisciplinary",
+            "mitochondria",
             "quantum-biology",
+            "mitochondrial-disease",
+            "aging",
+            "electron-transport-chain",
             "spectroscopy",
-            "biofilm",
-            "phage-therapy",
             "translational-science",
+            "quantum-protection",
+            "neurodegeneration",
+            "metabolic-imaging",
             "systems-thinking",
-            "meta-analysis",
-            "bridging-research",
         ],
         "preferred_tools": [
             "pubmed", "pubmed-database", "arxiv", "arxiv-database",
@@ -292,18 +304,19 @@ AGENT_TOOL_PROFILES: Dict[str, dict] = {
         ],
         "synthesis_config": {
             "cross_reference_mode": True,
-            "bridge_domains": ["biology", "chemistry"],
+            "bridge_domains": ["mitochondrial-biology", "quantum-physics"],
             "report_format": "interdisciplinary_synthesis",
             "min_sources_per_domain": 2,
             "contradiction_detection": True,
         },
         "research_focus": {
             "interests": [
-                "bridging quantum biology and spectroscopy findings",
-                "translational connections between biofilm and phage research",
-                "integrating metabolic imaging with infection biology",
-                "cross-domain hypothesis generation",
-                "meta-analysis of interdisciplinary approaches",
+                "how quantum effects in ETC relate to mitochondrial disease states",
+                "quantum biology of aging via mitochondrial dysfunction",
+                "quantum protection mechanisms in healthy vs diseased mitochondria",
+                "bridging mitochondrial spectroscopy with quantum tunneling models",
+                "translational implications of mitochondrial quantum efficiency",
+                "meta-analysis of quantum phenomena across respiratory complexes",
             ],
         },
     },
