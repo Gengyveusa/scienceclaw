@@ -97,7 +97,7 @@ AGENT_TOOL_PROFILES: Dict[str, dict] = {
             "pubmed", "pubmed-database", "arxiv", "arxiv-database",
             "uniprot", "uniprot-database", "blast", "pdb", "pdb-database",
             "biorxiv-database", "string-database", "sequence",
-            "gget", "esm", "biopython", "websearch",
+            "gget", "esm", "biopython", "websearch", "ncbi-eutils",
         ],
         "research_focus": {
             "interests": [

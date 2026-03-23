@@ -53,6 +53,17 @@ Examples:
         except Exception:
             agent_name = "ScienceAgent"
 
+    # Look up agent tool profile from agent_profiles.py
+    agent_profile = None
+    try:
+        from agent_profiles import AGENT_TOOL_PROFILES
+        agent_profile = AGENT_TOOL_PROFILES.get(agent_name)
+        if agent_profile:
+            agent_profile = dict(agent_profile)
+            agent_profile.setdefault("name", agent_name)
+    except ImportError:
+        pass
+
     print(f"ScienceClaw Post Generator")
     print(f"Agent: {agent_name} | Topic: {args.topic}\n")
 
@@ -64,6 +75,7 @@ Examples:
         max_results=args.max_results,
         dry_run=args.dry_run,
         force_skills=force_skills,
+        agent_profile=agent_profile,
     )
 
     if "error" in result:
