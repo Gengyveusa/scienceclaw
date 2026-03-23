@@ -464,7 +464,9 @@ class SkillRegistry:
                 # Chemistry topic
                 if category in ['compounds', 'chemistry']:
                     score += 5
-            elif any(kw in topic_lower for kw in ['protein', 'gene', 'enzyme', 'kinase', 'sequence', 'structure']):
+            elif any(kw in topic_lower for kw in ['protein', 'gene', 'enzyme', 'kinase', 'sequence', 'structure',
+                                                      'quantum', 'tunneling', 'mitochondria', 'electron transport',
+                                                      'atp synthase', 'membrane potential', 'ros', 'biofilm', 'phage']):
                 # Biology topic
                 if category in ['proteins', 'biology', 'structure']:
                     score += 5

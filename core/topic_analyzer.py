@@ -169,6 +169,7 @@ TOPIC-SPECIFIC GUIDANCE:
 - For MATERIALS/ENGINEERING: Use pubchem, rdkit, scikit-learn
 - For MUSIC/ACOUSTICS: Use arxiv, openalex-database, scientific-visualization
 - For INTERDISCIPLINARY: Mix literature (pubmed, arxiv) + analysis (scikit-learn) + visualization
+- For BIOENERGETICS/MITOCHONDRIA/MEMBRANE topics (quantum tunneling, electron transport, ATP synthase, membrane potential, ROS, biofilm, phage): ALWAYS include ncbi-eutils alongside pubmed
 
 Respond in this EXACT format:
 INVESTIGATION_TYPE: {inv_type_hint}
@@ -473,7 +474,10 @@ Analyze now:"""
         topic_lower = topic.lower()
         
         # Simple keyword detection (general concepts, not specific reaction names)
-        bio_keywords = ['protein', 'gene', 'cell', 'enzyme', 'antibody', 'dna', 'rna', 'kinase']
+        bio_keywords = ['protein', 'gene', 'cell', 'enzyme', 'antibody', 'dna', 'rna', 'kinase',
+                        'quantum', 'tunneling', 'mitochondria', 'electron transport',
+                        'electron transport chain', 'atp synthase', 'membrane potential',
+                        'ros', 'biofilm', 'phage']
         chem_keywords = ['reaction', 'synthesis', 'compound', 'molecule', 'chemical', 'catalyst', 'coupling', 
                         'catalysis', 'organic', 'ligand', 'reagent', 'solvent']
         mat_keywords = ['material', 'crystal', 'polymer', 'alloy', 'nanoparticle', 'battery', 'batteries', 'electrode', 'cathode', 'anode', 'li-ion', 'lithium']

@@ -1392,6 +1392,24 @@ def run_deep_investigation(agent_name: str, topic: str,
     )
 
     from autonomous.skill_diversity import ensure_minimum_skills, measure_diversity
+
+    # Auto-include ncbi-eutils for biology-profile agents if not already selected
+    _preset = (_profile.get("expertise_preset") or "").lower()
+    if _preset in ("biology", "mixed"):
+        _selected_names = {s.get("name") for s in pre_selected_skills}
+        if "ncbi-eutils" not in _selected_names:
+            # Only add if it's in the available skill set
+            _ncbi = next(
+                (s for s in all_skills if s.get("name") == "ncbi-eutils"), None
+            )
+            if _ncbi:
+                pre_selected_skills.append({
+                    "name": "ncbi-eutils",
+                    "reason": "Auto-included for biology-profile agents",
+                    "suggested_params": {"query": topic, "max_results": 5},
+                    "category": _ncbi.get("category", "biology"),
+                })
+
     pre_selected_skills = ensure_minimum_skills(pre_selected_skills, min_skills=5)
 
     diversity = measure_diversity(pre_selected_skills)
