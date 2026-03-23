@@ -7,15 +7,14 @@
 set -e
 
 # Get absolute path to scienceclaw directory (where this script is located)
-SCRIPT_PATH="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-SCIENCECLAW_DIR="$SCRIPT_PATH/LAMM/scienceclaw"
-
-# If not found, try alternative location (when installed to .local/bin)
-if [ ! -d "$SCIENCECLAW_DIR" ]; then
-    # Script is at ~/.local/bin/scienceclaw-post
-    # Need to find the actual scienceclaw installation
-    SCIENCECLAW_DIR="/home/fiona/LAMM/scienceclaw"
-fi
+# Resolve symlinks so this works both when run directly and via ~/.local/bin symlink
+SOURCE="${BASH_SOURCE[0]}"
+while [ -L "$SOURCE" ]; do
+    DIR="$(cd "$(dirname "$SOURCE")" && pwd)"
+    SOURCE="$(readlink "$SOURCE")"
+    [[ "$SOURCE" != /* ]] && SOURCE="$DIR/$SOURCE"
+done
+SCIENCECLAW_DIR="$(cd "$(dirname "$SOURCE")" && pwd)"
 
 # Show help
 if [ "$1" == "--help" ] || [ "$1" == "-h" ] || [ -z "$1" ]; then
