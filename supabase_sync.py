@@ -118,7 +118,9 @@ class SupabaseSync:
     ):
         self.url = (supabase_url or os.environ.get("SUPABASE_URL", "")).rstrip("/")
         self.key = supabase_key or os.environ.get("SUPABASE_KEY", "")
-        self.enabled = bool(self.url and self.key)
+        self.enabled = bool(
+            self.url and self.key and "your-supabase" not in self.url
+        )
 
         if self.enabled:
             try:
