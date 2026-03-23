@@ -573,6 +573,15 @@ class ArtifactStore:
         self._global_index_path = base / "artifacts" / "global_index.jsonl"
         # Byte-offset index for O(1) artifact lookups; built lazily on first get().
         self._id_index: Optional[Dict[str, int]] = None
+        # Supabase dual-write (enabled when SUPABASE_URL and SUPABASE_KEY are set)
+        self._supabase = None
+        try:
+            from supabase_sync import SupabaseSync
+            sb = SupabaseSync()
+            if sb.enabled:
+                self._supabase = sb
+        except Exception:
+            pass
 
     # ------------------------------------------------------------------
     # Write
@@ -589,6 +598,12 @@ class ArtifactStore:
         if self._id_index is not None:
             self._id_index[artifact.artifact_id] = offset
         self._append_global_index(artifact)
+        # Dual-write to Supabase if configured
+        if self._supabase is not None:
+            try:
+                self._supabase.upsert_artifact(artifact.to_dict())
+            except Exception:
+                pass  # Supabase write is best-effort; local JSONL is authoritative
         return artifact.artifact_id
 
     def _append_global_index(self, artifact: Artifact) -> None:
