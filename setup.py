@@ -61,7 +61,7 @@ EXPERTISE_PRESETS = {
         "organisms": ["human", "E. coli", "yeast", "Arabidopsis"],
         "proteins": ["p53", "insulin", "hemoglobin", "CRISPR-Cas9"],
         "compounds": [],
-        "tools": ["blast", "pubmed", "uniprot", "sequence", "pdb", "arxiv", "websearch"],
+        "tools": ["blast", "pubmed", "ncbi-eutils", "uniprot", "sequence", "pdb", "arxiv", "websearch"],
         "name_prefixes": ["Bio", "Gene", "Protein", "Science", "Data"],
         "name_suffixes": ["Bot", "Agent", "Explorer", "Hunter", "Seeker"],
     },
@@ -71,7 +71,7 @@ EXPERTISE_PRESETS = {
         "organisms": ["human"],
         "proteins": [],
         "compounds": ["aspirin", "imatinib", "metformin", "caffeine"],
-        "tools": ["pubchem", "chembl", "cas", "nistwebbook", "pubmed", "tdc", "arxiv", "websearch"],
+        "tools": ["pubchem", "chembl", "cas", "nistwebbook", "pubmed", "ncbi-eutils", "tdc", "arxiv", "websearch"],
         "name_prefixes": ["Chem", "Molecule", "Compound", "Drug", "Lab"],
         "name_suffixes": ["Bot", "Agent", "Explorer", "Hunter", "Seeker"],
     },
@@ -81,7 +81,7 @@ EXPERTISE_PRESETS = {
         "organisms": ["human", "E. coli"],
         "proteins": ["p53", "kinases"],
         "compounds": ["imatinib", "aspirin"],
-        "tools": ["blast", "pubmed", "uniprot", "pdb", "pubchem", "chembl", "tdc", "arxiv", "websearch"],
+        "tools": ["blast", "pubmed", "ncbi-eutils", "uniprot", "pdb", "pubchem", "chembl", "tdc", "arxiv", "websearch"],
         "name_prefixes": ["Bio", "Science", "Protein", "Molecule", "Research"],
         "name_suffixes": ["Bot", "Agent", "Explorer", "Scout", "Seeker"],
     },
@@ -95,7 +95,7 @@ EXPERTISE_PRESETS = {
         "organisms": [],
         "proteins": [],
         "compounds": ["LiCoO2", "NMC811", "LiFePO4", "Li2MnO3"],
-        "tools": ["materials", "pubmed", "arxiv", "rdkit", "pubchem", "websearch"],
+        "tools": ["materials", "pubmed", "ncbi-eutils", "arxiv", "rdkit", "pubchem", "websearch"],
         "name_prefixes": ["Crystal", "Materials", "Lattice", "Phase", "Solid"],
         "name_suffixes": ["Agent", "Bot", "Scout", "Explorer", "Claw"],
     },
@@ -113,7 +113,7 @@ QUICK_DEFAULTS = {
 SKILL_CATEGORIES = {
     "biology": [
         "blast", "uniprot", "pdb", "sequence", "alphafold", "alphafold-database",
-        "antibody-engineering", "binder-design", "binder-discovery", "bindcraft",
+        "antibody-engineering", "binder-design", "binder-discovery", "bindcraft", "ncbi-eutils",
         "biopython", "biorxiv-database", "bioservices", "boltz", "boltzgen",
         "cancer-variant-interpretation", "cellxgene-census", "crispr-screen-analysis",
         "deeptools", "ensembl-database", "epigenomics", "esm", "etetoolkit",
@@ -467,6 +467,7 @@ def _probe_skill(skill_name: str) -> Optional[dict]:
     # Map skill name → (script path relative to skills/, probe args)
     PROBE_MAP = {
         "pubmed":   ("pubmed/scripts/pubmed_search.py",   ["--query", "science", "--max-results", "1"]),
+        "ncbi-eutils": ("ncbi-eutils/scripts/ncbi_eutils.py", ["esearch", "--query", "science", "--max-results", "1"]),
         "websearch":("websearch/scripts/websearch.py",    ["--query", "science"]),
         "arxiv":    ("arxiv/scripts/arxiv_search.py",     ["--query", "science", "--max-results", "1"]),
         "uniprot":  ("uniprot/scripts/uniprot_fetch.py",  ["--query", "insulin", "--limit", "1"]),
