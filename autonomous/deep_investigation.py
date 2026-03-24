@@ -1346,6 +1346,18 @@ def run_deep_investigation(agent_name: str, topic: str,
         force_skills: If provided, override preferred_tools from profile and use exactly
                       these skill names (still filtered through the registry).
     """
+    # If no agent_profile provided, try to load from AGENT_TOOL_PROFILES
+    if not agent_profile:
+        try:
+            from agent_profiles import AGENT_TOOL_PROFILES
+            _tool_profile = AGENT_TOOL_PROFILES.get(agent_name)
+            if _tool_profile:
+                agent_profile = dict(_tool_profile)
+                agent_profile.setdefault("name", agent_name)
+                print(f"  [debug] Loaded agent tool profile for {agent_name}")
+        except ImportError:
+            pass
+
     if agent_profile:
         agent_name = agent_profile.get("name", agent_name)
         role = agent_profile.get("role", "")
@@ -1393,22 +1405,43 @@ def run_deep_investigation(agent_name: str, topic: str,
 
     from autonomous.skill_diversity import ensure_minimum_skills, measure_diversity
 
-    # Auto-include ncbi-eutils for biology-profile agents if not already selected
+    # Determine if this is a biology-class agent by checking both expertise_preset
+    # and specialization fields (agent_profiles.py uses "specialization", setup.py
+    # uses "expertise_preset").
     _preset = (_profile.get("expertise_preset") or "").lower()
-    if _preset in ("biology", "mixed"):
+    _specialization = (_profile.get("specialization") or "").lower()
+    _community_lower = (community or "").lower()
+    _is_bio_agent = (
+        _preset in ("biology", "mixed")
+        or _specialization in ("biology", "mixed")
+        or _community_lower == "biology"
+    )
+    print(f"  [debug] expertise_preset={_preset!r}, specialization={_specialization!r}, community={_community_lower!r}, is_bio={_is_bio_agent}")
+
+    # Mandatory skills for biology-class agents — injected right before execution
+    # to guarantee they are always present regardless of LLM skill selection.
+    _MANDATORY_BIO_SKILLS = ["ncbi-eutils", "pubmed", "websearch"]
+    if _is_bio_agent:
         _selected_names = {s.get("name") for s in pre_selected_skills}
-        if "ncbi-eutils" not in _selected_names:
-            # Only add if it's in the available skill set
-            _ncbi = next(
-                (s for s in all_skills if s.get("name") == "ncbi-eutils"), None
-            )
-            if _ncbi:
-                pre_selected_skills.append({
-                    "name": "ncbi-eutils",
-                    "reason": "Auto-included for biology-profile agents",
-                    "suggested_params": {"query": topic, "max_results": 5},
-                    "category": _ncbi.get("category", "biology"),
-                })
+        _full_registry = list(investigator.skill_registry.skills.values())
+        for _mand_name in _MANDATORY_BIO_SKILLS:
+            if _mand_name not in _selected_names:
+                # Search the FULL skill registry, not the filtered all_skills list
+                _mand_meta = next(
+                    (s for s in _full_registry if s.get("name") == _mand_name), None
+                )
+                if _mand_meta:
+                    pre_selected_skills.append({
+                        "name": _mand_name,
+                        "reason": f"Mandatory for biology-profile agents",
+                        "suggested_params": {"query": topic, "max_results": 5},
+                        "category": _mand_meta.get("category", "biology"),
+                    })
+                    print(f"  [debug] Injected mandatory skill: {_mand_name}")
+                else:
+                    print(f"  [debug] Mandatory skill {_mand_name} not found in registry")
+            else:
+                print(f"  [debug] Mandatory skill {_mand_name} already selected")
 
     pre_selected_skills = ensure_minimum_skills(pre_selected_skills, min_skills=5)
 
